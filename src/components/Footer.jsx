@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer class="mt-8 text-center text-gray-600">
+    <footer class="mt-8 text-center text-white">
       <p>© 2024 Personalised Learning. All rights reserved.</p>
       <p>
         Made on{' '}
@@ -8,7 +8,7 @@ function Footer() {
           href="https://www.zapt.ai"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-indigo-500 hover:underline"
+          class="text-white font-semibold hover:underline"
         >
           ZAPT
         </a>

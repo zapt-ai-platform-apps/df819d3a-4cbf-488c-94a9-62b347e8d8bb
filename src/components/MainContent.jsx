@@ -8,20 +8,22 @@ function MainContent() {
   const [wantsGeneratedQuestion, setWantsGeneratedQuestion] = createSignal(null);
 
   return (
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      {question() ? (
-        <Conversation question={question} setQuestion={setQuestion} />
-      ) : (
-        <>
-          <QuestionOption setWantsGeneratedQuestion={setWantsGeneratedQuestion} />
-          {wantsGeneratedQuestion() !== null && (
-            <QuestionForm
-              wantsGeneratedQuestion={wantsGeneratedQuestion}
-              setQuestion={setQuestion}
-            />
-          )}
-        </>
-      )}
+    <main class="flex items-center justify-center min-h-screen">
+      <div class="max-w-4xl w-full bg-white text-gray-800 rounded-lg shadow-md p-8 mx-4">
+        {question() ? (
+          <Conversation question={question} setQuestion={setQuestion} />
+        ) : (
+          <>
+            <QuestionOption setWantsGeneratedQuestion={setWantsGeneratedQuestion} />
+            {wantsGeneratedQuestion() !== null && (
+              <QuestionForm
+                wantsGeneratedQuestion={wantsGeneratedQuestion}
+                setQuestion={setQuestion}
+              />
+            )}
+          </>
+        )}
+      </div>
     </main>
   );
 }

@@ -37,7 +37,7 @@ function App() {
   });
 
   return (
-    <div class="min-h-screen bg-gray-50 text-gray-800">
+    <div class="min-h-screen bg-gradient-to-r from-purple-500 to-blue-500 text-white">
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/auth" element={<Auth />} />

@@ -14,11 +14,11 @@ function Header() {
   };
 
   return (
-    <header class="bg-white shadow-md sticky top-0 z-10">
+    <header class="bg-transparent sticky top-0 z-10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
           <h1
-            class="text-2xl font-bold text-indigo-600 cursor-pointer"
+            class="text-2xl font-bold text-white cursor-pointer"
             onClick={handleLogoClick}
           >
             Personalised Learning
