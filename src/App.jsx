@@ -39,7 +39,7 @@ function App() {
 
   return (
     <div
-      class={`flex flex-col min-h-screen ${
+      class={`flex flex-col h-full ${
         location.pathname === '/app'
           ? 'bg-white text-gray-800'
           : 'bg-gradient-to-r from-purple-500 to-blue-500 text-white'

@@ -94,31 +94,30 @@ Respond as the mentor in first person.`,
           )}
         </For>
       </div>
-      <form onSubmit={handleSubmitAnswer} class="space-y-4">
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Your Response</label>
-          <textarea
-            placeholder="Type your response here..."
-            value={answerInput()}
-            onInput={(e) => setAnswerInput(e.target.value)}
-            rows="8"
-            class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 box-border"
-            required
-            disabled={loading()}
-          />
-        </div>
-        <button
-          type="submit"
-          class={`w-full px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-300 ease-in-out cursor-pointer ${
-            loading() ? 'opacity-50 cursor-not-allowed' : ''
-          }`}
-          disabled={loading()}
-        >
-          <Show when={loading()} fallback="Submit">
-            Sending...
-          </Show>
-        </button>
-      </form>
+      <Show
+        when={!loading()}
+        fallback={<div class="text-center text-gray-700">Awaiting response...</div>}
+      >
+        <form onSubmit={handleSubmitAnswer} class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Your Response</label>
+            <textarea
+              placeholder="Type your response here..."
+              value={answerInput()}
+              onInput={(e) => setAnswerInput(e.target.value)}
+              rows="8"
+              class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 box-border"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="w-full px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-300 ease-in-out cursor-pointer"
+          >
+            Submit
+          </button>
+        </form>
+      </Show>
       <button
         class="mt-4 w-full px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-300 ease-in-out cursor-pointer"
         onClick={handleNewQuestion}

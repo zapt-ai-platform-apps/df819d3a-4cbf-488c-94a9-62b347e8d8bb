@@ -4,7 +4,9 @@ Engage in a conversational back-and-forth to reach the correct answer.
 
 ## Steps
 
-1. **Wait for Mentor's Response**: After submitting your answer, the app will provide feedback in the form of a message from the mentor.
+1. **Wait for Mentor's Response**: After submitting your answer, the app will indicate that it's awaiting a response from the mentor.
+   - The input area will be temporarily hidden, and a message "Awaiting response..." will be displayed.
+   - Once the mentor's response is received, it will appear in the conversation.
    - The mentor will guide you without directly giving the answer.
    - Feedback is displayed using proper formatting for readability.
 2. **Review Feedback**: Read the mentor's message carefully.
