@@ -2,6 +2,7 @@ import { createSignal, onMount, createEffect, Show } from 'solid-js';
 import { createEvent, supabase } from './supabaseClient';
 import { Auth } from '@supabase/auth-ui-solid';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
+import { SolidMarkdown } from 'solid-markdown';
 
 function App() {
   // State variables
@@ -212,7 +213,9 @@ function App() {
           <Show when={currentPage() === 'answerPage'}>
             <form onSubmit={handleSubmitAnswer} class="space-y-4">
               <h2 class="text-2xl font-bold mb-4 text-purple-600">Your Question</h2>
-              <p class="bg-white p-4 rounded-lg shadow-md whitespace-pre-wrap">{question()}</p>
+              <div class="bg-white p-4 rounded-lg shadow-md">
+                <SolidMarkdown children={question()} />
+              </div>
               <h2 class="text-2xl font-bold mb-4 text-purple-600">Enter Your Answer</h2>
               <textarea
                 placeholder="Type your answer here..."
@@ -255,7 +258,15 @@ function App() {
             </button>
           </Show>
           <p class="mt-8 text-center text-gray-600">
-            Made on <a href="https://www.zapt.ai" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">ZAPT</a>
+            Made on{' '}
+            <a
+              href="https://www.zapt.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-blue-500 hover:underline"
+            >
+              ZAPT
+            </a>
           </p>
         </div>
       </Show>
