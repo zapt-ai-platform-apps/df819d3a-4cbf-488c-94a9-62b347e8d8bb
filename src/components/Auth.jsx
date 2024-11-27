@@ -5,7 +5,7 @@ import { ThemeSupa } from '@supabase/auth-ui-shared';
 function AuthComponent() {
   return (
     <div class="flex items-center justify-center h-full">
-      <div class="w-full max-w-md p-8 bg-white rounded-xl shadow-lg">
+      <div class="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
         <h2 class="text-3xl font-bold mb-6 text-center text-purple-600">Sign in with ZAPT</h2>
         <a
           href="https://www.zapt.ai"

@@ -6,7 +6,7 @@ function Footer() {
         href="https://www.zapt.ai"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-blue-500 hover:underline"
+        class="text-indigo-500 hover:underline"
       >
         ZAPT
       </a>

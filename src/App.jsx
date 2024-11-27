@@ -28,7 +28,7 @@ function App() {
   });
 
   return (
-    <div class="h-full bg-gradient-to-br from-purple-100 to-blue-100 text-gray-800">
+    <div class="min-h-screen bg-gray-50 text-gray-800">
       <Show when={user()} fallback={<Auth />}>
         <>
           <Header />

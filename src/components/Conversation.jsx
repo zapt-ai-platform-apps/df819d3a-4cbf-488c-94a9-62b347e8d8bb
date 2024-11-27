@@ -64,18 +64,18 @@ Respond as the mentor in first person.`,
   };
 
   return (
-    <div class="space-y-4">
-      <h2 class="text-2xl font-bold mb-4 text-purple-600">Conversation</h2>
+    <div class="space-y-6">
+      <h2 class="text-3xl font-bold mb-4 text-gray-900 text-center">Conversation</h2>
       <div
         ref={(el) => (conversationContainer = el)}
-        class="bg-white p-4 rounded-lg shadow-md max-h-[50vh] overflow-y-auto"
+        class="bg-white p-6 rounded-lg shadow-md max-h-[50vh] overflow-y-auto"
       >
         <For each={conversation()}>
           {(msg) => (
             <div class={`mb-4 ${msg.role === 'mentor' ? 'text-left' : 'text-right'}`}>
               <div
-                class={`inline-block p-4 rounded-lg ${
-                  msg.role === 'mentor' ? 'bg-purple-200' : 'bg-blue-200'
+                class={`inline-block p-4 rounded-md ${
+                  msg.role === 'mentor' ? 'bg-blue-100 text-gray-800' : 'bg-green-100 text-gray-800'
                 }`}
               >
                 <SolidMarkdown>{msg.content}</SolidMarkdown>
@@ -85,16 +85,19 @@ Respond as the mentor in first person.`,
         </For>
       </div>
       <form onSubmit={handleSubmitAnswer} class="space-y-4">
-        <textarea
-          placeholder="Type your response here..."
-          value={answerInput()}
-          onInput={(e) => setAnswerInput(e.target.value)}
-          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent box-border"
-          required
-        />
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Your Response</label>
+          <textarea
+            placeholder="Type your response here..."
+            value={answerInput()}
+            onInput={(e) => setAnswerInput(e.target.value)}
+            class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 box-border"
+            required
+          />
+        </div>
         <button
           type="submit"
-          class={`w-full px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer ${
+          class={`w-full px-6 py-3 bg-indigo-600 text-white rounded-md shadow-md hover:bg-indigo-700 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer ${
             loading() ? 'opacity-50 cursor-not-allowed' : ''
           }`}
           disabled={loading()}
@@ -105,7 +108,7 @@ Respond as the mentor in first person.`,
         </button>
       </form>
       <button
-        class="mt-4 w-full px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+        class="mt-4 w-full px-6 py-3 bg-red-500 text-white rounded-md shadow-md hover:bg-red-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
         onClick={handleNewQuestion}
       >
         New Question
