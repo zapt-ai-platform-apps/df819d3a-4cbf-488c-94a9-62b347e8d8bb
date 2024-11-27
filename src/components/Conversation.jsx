@@ -71,22 +71,12 @@ Respond as the mentor in first person.`,
           {(msg) => (
             <div class={`flex mb-4 ${msg.role === 'mentor' ? 'justify-start' : 'justify-end'}`}>
               <div class="flex items-end max-w-full">
-                <Show when={msg.role === 'mentor'}>
-                  <div class="hidden sm:block w-8 h-8 mr-2">
-                    <img src="https://images.unsplash.com/photo-1637173282320-92462b116d41?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NjQ4Nzh8MHwxfHNlYXJjaHw1fHxtZW50b3IlMjBhdmF0YXJ8ZW58MHx8fHwxNzMyNzMwOTg4fDA&ixlib=rb-4.0.3&q=80&w=1080"
-                      
-                      alt="Mentor Avatar"
-                      class="w-8 h-8 rounded-full"
-                      data-image-request="mentor avatar"
-                    />
-                  </div>
-                </Show>
                 <div
                   class={`relative px-4 py-2 rounded-lg ${
                     msg.role === 'mentor'
                       ? 'bg-blue-100 text-gray-800'
                       : 'bg-green-100 text-gray-800'
-                  } max-w-xs md:max-w-md lg:max-w-lg`}
+                  } max-w-xs md:max-w-sm lg:max-w-md`}
                 >
                   <SolidMarkdown>{msg.content}</SolidMarkdown>
                   <span
@@ -97,16 +87,6 @@ Respond as the mentor in first person.`,
                     } transform rotate-45`}
                   ></span>
                 </div>
-                <Show when={msg.role === 'student'}>
-                  <div class="hidden sm:block w-8 h-8 ml-2">
-                    <img src="https://images.unsplash.com/photo-1516534775068-ba3e7458af70?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NjQ4Nzh8MHwxfHNlYXJjaHwzfHxzdHVkZW50JTIwYXZhdGFyfGVufDB8fHx8MTczMjczMDk4OHww&ixlib=rb-4.0.3&q=80&w=1080"
-                      
-                      alt="Student Avatar"
-                      class="w-8 h-8 rounded-full"
-                      data-image-request="student avatar"
-                    />
-                  </div>
-                </Show>
               </div>
             </div>
           )}
@@ -126,7 +106,7 @@ Respond as the mentor in first person.`,
               placeholder="Type your response..."
               value={answerInput()}
               onInput={(e) => setAnswerInput(e.target.value)}
-              rows="1"
+              rows="3"
               class="flex-1 resize-none p-3 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 box-border text-gray-800"
               required
             />

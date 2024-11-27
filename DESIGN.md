@@ -88,6 +88,13 @@
 - **Enhanced Textareas**
   - Increased default size for response textarea to improve usability
 
+### Adjustments
+
+- **Removed Avatar Images**
+  - Eliminated avatar images from the conversation to reduce visual clutter and distractions.
+- **Reduced Conversation Width**
+  - Decreased the maximum width of conversation bubbles on desktop screens to enhance readability and reduce eye strain.
+
 ### B. Technical Specifications
 
 #### Spacing System
@@ -120,6 +127,7 @@
 
 - Mobile-first design
 - Ensuring readability and usability on all devices
+- Adjusted maximum width of conversation bubbles on larger screens for better readability
 
 ## Application Process
 
@@ -138,5 +146,7 @@
 4. **Implementation Planning**
    - Updated component styles to reflect a toned-down, minimalist design
    - Adjusted headers, footers, and backgrounds for consistency
+   - Removed avatar images from the conversation to reduce visual clutter
+   - Reduced the width of conversation bubbles on desktop to improve readability
    - Increased default size of the response textarea to enhance user experience by allowing more space for user input
    - Ensured that interactive elements remain clear and accessible
