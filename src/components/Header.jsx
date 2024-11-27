@@ -6,6 +6,7 @@ function Header() {
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
+    navigate('/');
   };
 
   const handleLogoClick = () => {

@@ -6,6 +6,7 @@ import Auth from './components/Auth';
 import Header from './components/Header';
 import MainContent from './components/MainContent';
 import Footer from './components/Footer';
+import ProtectedRoute from './components/ProtectedRoute';
 import './index.css';
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
         navigate('/app');
       } else {
         setUser(null);
-        navigate('/auth');
+        // Removed automatic navigation to '/auth' to allow access to the landing page
       }
     });
 
@@ -40,13 +41,16 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/auth" element={<Auth />} />
-        <Route path="/app" element={
-          <>
-            <Header />
-            <MainContent />
-            <Footer />
-          </>
-        } />
+        <Route
+          path="/app"
+          element={
+            <ProtectedRoute user={user}>
+              <Header />
+              <MainContent />
+              <Footer />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </div>
   );
