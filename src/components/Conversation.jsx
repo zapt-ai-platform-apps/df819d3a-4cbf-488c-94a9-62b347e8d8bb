@@ -72,11 +72,22 @@ Respond as the mentor in first person.`,
       >
         <For each={conversation()}>
           {(msg) => (
-            <div class={`mb-4 ${msg.role === 'mentor' ? 'text-left' : 'text-right'}`}>
+            <div class={`flex mb-4 ${msg.role === 'mentor' ? 'justify-start' : 'justify-end'}`}>
               <div
-                class={`inline-block p-3 rounded-md bg-gray-100 text-gray-800`}
+                class={`relative max-w-xs md:max-w-md lg:max-w-lg px-4 py-2 rounded-lg ${
+                  msg.role === 'mentor'
+                    ? 'bg-indigo-100 text-gray-800'
+                    : 'bg-green-100 text-gray-800'
+                }`}
               >
                 <SolidMarkdown>{msg.content}</SolidMarkdown>
+                <span
+                  class={`absolute top-0 ${
+                    msg.role === 'mentor' ? '-left-2' : '-right-2'
+                  } w-4 h-4 ${
+                    msg.role === 'mentor' ? 'bg-indigo-100' : 'bg-green-100'
+                  } transform rotate-45`}
+                ></span>
               </div>
             </div>
           )}
@@ -89,7 +100,7 @@ Respond as the mentor in first person.`,
             placeholder="Type your response here..."
             value={answerInput()}
             onInput={(e) => setAnswerInput(e.target.value)}
-            class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 box-border"
+            class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 box-border"
             required
           />
         </div>
