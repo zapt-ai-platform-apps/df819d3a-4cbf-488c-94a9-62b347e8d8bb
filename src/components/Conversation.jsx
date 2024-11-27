@@ -18,6 +18,9 @@ function Conversation(props) {
       // Add student's answer to conversation
       setConversation([...conversation(), { role: 'student', content: answerInput() }]);
 
+      // Clear the student's answer input immediately
+      setAnswerInput('');
+
       try {
         const conversationMessages = conversation()
           .map((msg) => `${msg.role === 'student' ? 'Student' : 'Mentor'}: ${msg.content}`)
@@ -36,8 +39,6 @@ Respond as the mentor in first person.`,
         // Add mentor's feedback to conversation
         setConversation([...conversation(), { role: 'mentor', content: result }]);
 
-        // Clear the student's answer input
-        setAnswerInput('');
       } catch (error) {
         console.error('Error checking answer:', error);
       } finally {
@@ -100,6 +101,7 @@ Respond as the mentor in first person.`,
             placeholder="Type your response here..."
             value={answerInput()}
             onInput={(e) => setAnswerInput(e.target.value)}
+            rows="8"
             class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 box-border"
             required
           />
