@@ -65,7 +65,7 @@ Respond as the mentor in first person.`,
   };
 
   return (
-    <div class="flex flex-col h-full">
+    <div class="flex flex-col h-full max-w-2xl mx-auto">
       <div class="flex-1 overflow-y-auto p-4" ref={(el) => (conversationContainer = el)}>
         <For each={conversation()}>
           {(msg) => (
@@ -76,7 +76,7 @@ Respond as the mentor in first person.`,
                     msg.role === 'mentor'
                       ? 'bg-blue-100 text-gray-800'
                       : 'bg-green-100 text-gray-800'
-                  } max-w-xs md:max-w-sm lg:max-w-md`}
+                  } max-w-xs md:max-w-md lg:max-w-md`}
                 >
                   <SolidMarkdown>{msg.content}</SolidMarkdown>
                   <span
@@ -106,7 +106,7 @@ Respond as the mentor in first person.`,
               placeholder="Type your response..."
               value={answerInput()}
               onInput={(e) => setAnswerInput(e.target.value)}
-              rows="3"
+              rows="1"
               class="flex-1 resize-none p-3 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 box-border text-gray-800"
               required
             />

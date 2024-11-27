@@ -80,6 +80,9 @@
 
 - Text-based content
 - Simplified cards and lists
+- **Adjusted Conversation Layout**
+  - Removed avatar images to minimize distractions
+  - Reduced conversation width on desktop for improved readability
 
 #### Interactive Components
 
@@ -87,13 +90,6 @@
 - Input fields with clear labels
 - **Enhanced Textareas**
   - Increased default size for response textarea to improve usability
-
-### Adjustments
-
-- **Removed Avatar Images**
-  - Eliminated avatar images from the conversation to reduce visual clutter and distractions.
-- **Reduced Conversation Width**
-  - Decreased the maximum width of conversation bubbles on desktop screens to enhance readability and reduce eye strain.
 
 ### B. Technical Specifications
 
@@ -127,7 +123,8 @@
 
 - Mobile-first design
 - Ensuring readability and usability on all devices
-- Adjusted maximum width of conversation bubbles on larger screens for better readability
+- **Adjusted Layout**
+  - Limited maximum width of conversation messages on larger screens to enhance readability
 
 ## Application Process
 
@@ -146,7 +143,7 @@
 4. **Implementation Planning**
    - Updated component styles to reflect a toned-down, minimalist design
    - Adjusted headers, footers, and backgrounds for consistency
-   - Removed avatar images from the conversation to reduce visual clutter
-   - Reduced the width of conversation bubbles on desktop to improve readability
    - Increased default size of the response textarea to enhance user experience by allowing more space for user input
+   - Removed avatar images in conversation to minimize distractions
+   - Adjusted conversation width on desktop to improve readability by limiting the maximum width of message bubbles
    - Ensured that interactive elements remain clear and accessible
