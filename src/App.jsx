@@ -1,13 +1,11 @@
-import { createSignal, onMount, createEffect, Show } from 'solid-js';
+import { createSignal, onMount, Show, onCleanup } from 'solid-js';
 import { createEvent, supabase } from './supabaseClient';
 import { Auth } from '@supabase/auth-ui-solid';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { SolidMarkdown } from 'solid-markdown';
 
 function App() {
-  // State variables
   const [user, setUser] = createSignal(null);
-  const [currentPage, setCurrentPage] = createSignal('login');
   const [question, setQuestion] = createSignal('');
   const [answer, setAnswer] = createSignal('');
   const [feedback, setFeedback] = createSignal('');
@@ -18,43 +16,46 @@ function App() {
   const [loadingQuestionGeneration, setLoadingQuestionGeneration] = createSignal(false);
 
   // Authentication
-  const checkUserSignedIn = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (user) {
+  onMount(() => {
+    supabase.auth.getUser().then(({ data: { user } }) => {
       setUser(user);
-      setCurrentPage('homePage');
-    }
-  };
-  
-  onMount(checkUserSignedIn);
-  
-  createEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange((_, session) => {
+    });
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
       if (session?.user) {
         setUser(session.user);
-        setCurrentPage('homePage');
       } else {
         setUser(null);
-        setCurrentPage('login');
+        // Clear any user-specific state when user signs out
+        resetState();
       }
     });
-    
-    return () => {
-      authListener.unsubscribe();
-    };
+
+    onCleanup(() => {
+      authListener?.unsubscribe();
+    });
   });
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     setUser(null);
-    setCurrentPage('login');
+  };
+
+  const resetState = () => {
+    setQuestion('');
+    setAnswer('');
+    setFeedback('');
+    setYear('');
+    setSubject('');
+    setWantsGeneratedQuestion(null);
   };
 
   // Handle question submission
   const handleSubmitQuestion = (e) => {
     e.preventDefault();
     if (question()) {
-      setCurrentPage('answerPage');
+      setAnswer('');
+      setFeedback('');
     }
   };
 
@@ -69,7 +70,8 @@ function App() {
           response_type: 'text'
         });
         setQuestion(result);
-        setCurrentPage('answerPage');
+        setAnswer('');
+        setFeedback('');
       } catch (error) {
         console.error('Error generating question:', error);
       } finally {
@@ -89,7 +91,6 @@ function App() {
           response_type: 'text'
         });
         setFeedback(result);
-        setCurrentPage('feedbackPage');
       } catch (error) {
         console.error('Error checking answer:', error);
       } finally {
@@ -101,7 +102,7 @@ function App() {
   return (
     <div class="min-h-screen bg-gradient-to-br from-purple-100 to-blue-100 p-4 text-gray-800">
       <Show
-        when={currentPage() === 'homePage' || currentPage() === 'answerPage' || currentPage() === 'feedbackPage'}
+        when={user()}
         fallback={
           <div class="flex items-center justify-center min-h-screen">
             <div class="w-full max-w-md p-8 bg-white rounded-xl shadow-lg">
@@ -137,7 +138,7 @@ function App() {
               Sign Out
             </button>
           </div>
-          <Show when={currentPage() === 'homePage'}>
+          <Show when={!question()}>
             <div class="space-y-4">
               <h2 class="text-2xl font-bold mb-4 text-purple-600">Do you want us to generate a question for you?</h2>
               <div class="flex space-x-4">
@@ -210,11 +211,11 @@ function App() {
               </Show>
             </div>
           </Show>
-          <Show when={currentPage() === 'answerPage'}>
+          <Show when={question() && !feedback()}>
             <form onSubmit={handleSubmitAnswer} class="space-y-4">
               <h2 class="text-2xl font-bold mb-4 text-purple-600">Your Question</h2>
               <div class="bg-white p-4 rounded-lg shadow-md">
-                <SolidMarkdown children={question()} />
+                <SolidMarkdown>{question()}</SolidMarkdown>
               </div>
               <h2 class="text-2xl font-bold mb-4 text-purple-600">Enter Your Answer</h2>
               <textarea
@@ -237,7 +238,7 @@ function App() {
               </button>
             </form>
           </Show>
-          <Show when={currentPage() === 'feedbackPage'}>
+          <Show when={feedback()}>
             <h2 class="text-2xl font-bold mb-4 text-purple-600">Feedback</h2>
             <div class="bg-white p-4 rounded-lg shadow-md">
               <p class="text-gray-700 whitespace-pre-wrap">{feedback()}</p>
@@ -245,13 +246,7 @@ function App() {
             <button
               class="mt-4 w-full px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
               onClick={() => {
-                setQuestion('');
-                setAnswer('');
-                setFeedback('');
-                setYear('');
-                setSubject('');
-                setWantsGeneratedQuestion(null);
-                setCurrentPage('homePage');
+                resetState();
               }}
             >
               New Question
