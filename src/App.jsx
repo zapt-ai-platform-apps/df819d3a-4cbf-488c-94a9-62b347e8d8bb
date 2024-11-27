@@ -69,7 +69,7 @@ function App() {
       setLoadingQuestionGeneration(true);
       try {
         const result = await createEvent('chatgpt_request', {
-          prompt: `Generate a GCSE level question for a UK student in year ${year()} on the subject of ${subject()}. Include any necessary information, and provide the total marks for the question. Format the question appropriately.`,
+          prompt: `Generate a GCSE level question for a UK student in year ${year()} on the subject of ${subject()}. Include any necessary information, and provide the total marks for the question. Do not include the answer or solution. Format the question appropriately.`,
           response_type: 'text',
         });
         setQuestion(result);
@@ -162,7 +162,7 @@ Respond as the mentor in first person.`,
           </div>
         }
       >
-        <div class="max-w-2xl mx-auto">
+        <div class="max-w-full md:max-w-2xl lg:max-w-4xl mx-auto">
           <div class="flex justify-between items-center mb-8">
             <h1 class="text-4xl font-bold text-purple-600">Personalised Learning</h1>
             <button
@@ -249,7 +249,7 @@ Respond as the mentor in first person.`,
             <div class="space-y-4">
               <h2 class="text-2xl font-bold mb-4 text-purple-600">Conversation</h2>
               <div
-                ref={el => (conversationContainer = el)}
+                ref={(el) => (conversationContainer = el)}
                 class="bg-white p-4 rounded-lg shadow-md max-h-[50vh] overflow-y-auto"
               >
                 <For each={conversation()}>
