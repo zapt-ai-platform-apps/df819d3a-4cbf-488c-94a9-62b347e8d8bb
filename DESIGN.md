@@ -6,12 +6,12 @@
 
 - **Clarity**: Information is immediately understandable.
 - **Warmth**: Approachable and human.
-- **Sophistication**: Premium and trustworthy experience.
+- **Simplicity**: Reduced cognitive load.
 
 ### B. Design Priorities
 
 1. User confidence
-2. Visual impact
+2. Simplicity
 3. Learning curve
 4. Accessibility
 5. Speed of use
@@ -22,16 +22,16 @@
 
 - Guided experience
 - Consistent patterns
-- Rich feedback
+- Calm interface
 
 ## 2. Visual Theme Layer
 
-### Material Design
+### Classic Light
 
-- Paper-like layers
-- Bold colors
-- Motion-focused
-- Best for: Android, Google-style apps
+- Clean white or neutral backgrounds
+- Subtle shadows
+- Clear contrast
+- Best for: Professional, educational apps
 
 ## 3. Design Principles Layer
 
@@ -42,28 +42,26 @@
   - Aligned elements
   - Predictable patterns
 - **Contextual Density**
-  - Dense for data-heavy areas
-  - Spacious for content focus
-  - Balance information needs
+  - Adequate spacing for readability
+  - Balanced information presentation
 
 ### B. Visual Hierarchy
 
 - **Subtle Depth**
-  - Light shadows
-  - Elevation to indicate hierarchy
+  - Minimal use of shadows
+  - Light borders
 - **Clear Hierarchy**
   - Important info stands out
   - Secondary info recedes
-  - Visual relationships clear
 
 ### C. User Experience
 
-- **Vibrant Interface**
-  - Bold, contrasting colors
-  - Meaningful color use
-- **Interactive Animations**
-  - Smooth transitions
-  - Motion indicates interactions
+- **Quiet Interface**
+  - Muted colors
+  - Minimal distractions
+- **Gentle Interactions**
+  - Subtle hover states
+  - Minimal animations
 - **Typography with Purpose**
   - Clear hierarchy
   - Readable fonts
@@ -74,22 +72,19 @@
 
 #### Layout Components
 
-- App Bar (top navigation)
-- Card layouts
-- Grid systems
-- Section dividers
+- Simplified Navigation
+- Minimalist headers and footers
+- Consistent spacing
 
 #### Content Components
 
-- Cards
-- Lists
-- Tabs
+- Text-based content
+- Simplified cards and lists
 
 #### Interactive Components
 
-- Floating Action Buttons
-- Raised Buttons
-- Inputs with labels
+- Standard Buttons
+- Input fields with clear labels
 
 ### B. Technical Specifications
 
@@ -97,54 +92,47 @@
 
 - Base unit: 8px
 - Spacing scale: Multiples of 8px
-- Margin/padding patterns: Consistent use of spacing for visual harmony
+- Consistent use of spacing for visual harmony
 
 #### Color System
 
-- Primary palette: Deep purples and blues
-- Secondary palette: Accents in teal or amber
-- Neutral grays
-- Feedback colors: Green for success, red for errors
+- Neutral palette: Whites, grays
+- Minimal use of accent colors
+- Feedback colors: Subtle green for success, subtle red for errors
 
 #### Typography Scale
 
 - Font family: Roboto or system sans-serif
-- Size scale: 14px, 16px, 20px, 24px, 32px
-- Weight scale: Regular, Medium, Bold
+- Size scale: 14px, 16px, 20px
+- Weight scale: Regular, Medium
 - Line heights: 1.5 for comfortable reading
 
 #### Interactive States
 
-- Hover: Elevation and color change
-- Focus: Outline or ring to indicate focus
-- Active: Button press effect
+- Hover: Light background changes
+- Focus: Clear focus indicators
+- Active: Minimal visual change
 - Disabled: Reduced opacity
 
 #### Responsive Approach
 
-- Breakpoints:
-  - Mobile-first design
-  - Small screens: Full-width elements
-  - Medium screens: Centered content with padding
-  - Large screens: Max-width containers
+- Mobile-first design
+- Ensuring readability and usability on all devices
 
 ## Application Process
 
 1. **Strategy Definition**
-   - Defined core values of clarity, warmth, and sophistication.
-   - Prioritized user confidence and visual impact.
+   - Shifted focus to simplicity and reduced distractions
+   - Prioritized calm interface and user confidence
 
 2. **Theme Selection**
-   - Chose the Material Design theme for a modern and visually impressive interface.
-   - Aligns with educational tools and is familiar to users.
+   - Changed to Classic Light theme for a clean and professional look
+   - Ensures content is the main focus without distractions
 
 3. **Principles Application**
-   - Applied structured layout and contextual density.
-   - Ensured visual hierarchy with elevation and bold colors.
+   - Applied quiet interface principles to reduce visual distractions
+   - Simplified color palette and minimized use of bold colors
 
 4. **Implementation Planning**
-   - Defined component library with Material Design components.
-   - Documented technical specs for consistency.
-   - Created pattern library for future scalability.
-
-This design document guides the overall aesthetic and functional implementation of the Personalised Learning app, ensuring a cohesive and user-friendly experience with a modern and impressive look.
+   - Updated component styles to reflect toned-down design
+   - Ensured consistency across all components

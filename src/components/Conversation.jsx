@@ -65,18 +65,16 @@ Respond as the mentor in first person.`,
 
   return (
     <div class="space-y-6">
-      <h2 class="text-3xl font-bold mb-4 text-gray-900 text-center">Conversation</h2>
+      <h2 class="text-2xl font-semibold mb-4 text-gray-800 text-center">Conversation</h2>
       <div
         ref={(el) => (conversationContainer = el)}
-        class="bg-white p-6 rounded-lg shadow-md max-h-[50vh] overflow-y-auto"
+        class="bg-gray-50 p-4 rounded-md border border-gray-200 max-h-[50vh] overflow-y-auto"
       >
         <For each={conversation()}>
           {(msg) => (
             <div class={`mb-4 ${msg.role === 'mentor' ? 'text-left' : 'text-right'}`}>
               <div
-                class={`inline-block p-4 rounded-md ${
-                  msg.role === 'mentor' ? 'bg-blue-100 text-gray-800' : 'bg-green-100 text-gray-800'
-                }`}
+                class={`inline-block p-3 rounded-md bg-gray-100 text-gray-800`}
               >
                 <SolidMarkdown>{msg.content}</SolidMarkdown>
               </div>
@@ -91,13 +89,13 @@ Respond as the mentor in first person.`,
             placeholder="Type your response here..."
             value={answerInput()}
             onInput={(e) => setAnswerInput(e.target.value)}
-            class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 box-border"
+            class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 box-border"
             required
           />
         </div>
         <button
           type="submit"
-          class={`w-full px-6 py-3 bg-indigo-600 text-white rounded-md shadow-md hover:bg-indigo-700 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer ${
+          class={`w-full px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-300 ease-in-out cursor-pointer ${
             loading() ? 'opacity-50 cursor-not-allowed' : ''
           }`}
           disabled={loading()}
@@ -108,7 +106,7 @@ Respond as the mentor in first person.`,
         </button>
       </form>
       <button
-        class="mt-4 w-full px-6 py-3 bg-red-500 text-white rounded-md shadow-md hover:bg-red-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+        class="mt-4 w-full px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-300 ease-in-out cursor-pointer"
         onClick={handleNewQuestion}
       >
         New Question
