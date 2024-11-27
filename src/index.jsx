@@ -1,4 +1,5 @@
 import { render } from 'solid-js/web';
+import { Router } from '@solidjs/router';
 import App from './App';
 import './index.css';
 
@@ -26,4 +27,8 @@ if (!window.location.hostname.includes('vercel.app')) {
   document.head.appendChild(umamiScript);
 }
 
-render(() => <App />, document.getElementById('root'));
+render(() => (
+  <Router>
+    <App />
+  </Router>
+), document.getElementById('root'));
