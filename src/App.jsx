@@ -1,6 +1,6 @@
 import { createSignal, onMount, onCleanup } from 'solid-js';
 import { supabase } from './supabaseClient';
-import { Routes, Route, useNavigate } from '@solidjs/router';
+import { Routes, Route, useNavigate, useLocation } from '@solidjs/router';
 import LandingPage from './components/LandingPage';
 import Auth from './components/Auth';
 import Header from './components/Header';
@@ -12,6 +12,7 @@ import './index.css';
 function App() {
   const [user, setUser] = createSignal(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   onMount(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
@@ -37,7 +38,13 @@ function App() {
   });
 
   return (
-    <div class="min-h-screen bg-gradient-to-r from-purple-500 to-blue-500 text-white">
+    <div
+      class={`min-h-screen ${
+        location.pathname === '/app'
+          ? 'bg-white text-gray-800'
+          : 'bg-gradient-to-r from-purple-500 to-blue-500 text-white'
+      }`}
+    >
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/auth" element={<Auth />} />
