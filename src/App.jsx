@@ -1,4 +1,5 @@
-import { createSignal, onMount, Show, onCleanup } from 'solid-js';
+```jsx
+import { createSignal, onMount, Show, onCleanup, For } from 'solid-js';
 import { createEvent, supabase } from './supabaseClient';
 import { Auth } from '@supabase/auth-ui-solid';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
@@ -7,8 +8,8 @@ import { SolidMarkdown } from 'solid-markdown';
 function App() {
   const [user, setUser] = createSignal(null);
   const [question, setQuestion] = createSignal('');
-  const [answer, setAnswer] = createSignal('');
-  const [feedback, setFeedback] = createSignal('');
+  const [conversation, setConversation] = createSignal([]);
+  const [answerInput, setAnswerInput] = createSignal('');
   const [loading, setLoading] = createSignal(false);
   const [wantsGeneratedQuestion, setWantsGeneratedQuestion] = createSignal(null);
   const [year, setYear] = createSignal('');
@@ -43,8 +44,8 @@ function App() {
 
   const resetState = () => {
     setQuestion('');
-    setAnswer('');
-    setFeedback('');
+    setConversation([]);
+    setAnswerInput('');
     setYear('');
     setSubject('');
     setWantsGeneratedQuestion(null);
@@ -54,8 +55,8 @@ function App() {
   const handleSubmitQuestion = (e) => {
     e.preventDefault();
     if (question()) {
-      setAnswer('');
-      setFeedback('');
+      setConversation([{ role: 'mentor', content: question() }]);
+      setAnswerInput('');
     }
   };
 
@@ -67,11 +68,11 @@ function App() {
       try {
         const result = await createEvent('chatgpt_request', {
           prompt: `Generate a GCSE level question for a UK student in year ${year()} on the subject of ${subject()}. Include any necessary information, and provide the total marks for the question. Format the question appropriately.`,
-          response_type: 'text'
+          response_type: 'text',
         });
         setQuestion(result);
-        setAnswer('');
-        setFeedback('');
+        setConversation([{ role: 'mentor', content: result }]);
+        setAnswerInput('');
       } catch (error) {
         console.error('Error generating question:', error);
       } finally {
@@ -83,14 +84,32 @@ function App() {
   // Handle answer submission
   const handleSubmitAnswer = async (e) => {
     e.preventDefault();
-    if (answer()) {
+    if (answerInput()) {
       setLoading(true);
+
+      // Add student's answer to conversation
+      setConversation([...conversation(), { role: 'student', content: answerInput() }]);
+
       try {
+        const conversationMessages = conversation()
+          .map((msg) => `${msg.role === 'student' ? 'Student' : 'Mentor'}: ${msg.content}`)
+          .join('\n');
+
         const result = await createEvent('chatgpt_request', {
-          prompt: `The student was asked the question: "${question()}". They answered: "${answer()}". Check if the answer is correct. If correct, respond: "Great job!". If not, guide the student to understand how to answer the question correctly without stating the answer directly.`,
-          response_type: 'text'
+          prompt: `You are helping a student learn. Continue the conversation to guide them to the correct answer without giving away the answer directly. Use encouragement and ask probing questions to help them think critically.
+
+Conversation so far:
+${conversationMessages}
+
+Respond as the mentor in first person.`,
+          response_type: 'text',
         });
-        setFeedback(result);
+
+        // Add mentor's feedback to conversation
+        setConversation([...conversation(), { role: 'mentor', content: result }]);
+
+        // Clear the student's answer input
+        setAnswerInput('');
       } catch (error) {
         console.error('Error checking answer:', error);
       } finally {
@@ -211,46 +230,53 @@ function App() {
               </Show>
             </div>
           </Show>
-          <Show when={question() && !feedback()}>
-            <form onSubmit={handleSubmitAnswer} class="space-y-4">
-              <h2 class="text-2xl font-bold mb-4 text-purple-600">Your Question</h2>
-              <div class="bg-white p-4 rounded-lg shadow-md">
-                <SolidMarkdown>{question()}</SolidMarkdown>
+          <Show when={question()}>
+            <div class="space-y-4">
+              <h2 class="text-2xl font-bold mb-4 text-purple-600">Conversation</h2>
+              <div class="bg-white p-4 rounded-lg shadow-md max-h-[50vh] overflow-y-auto">
+                <For each={conversation()}>
+                  {(msg) => (
+                    <div class={`mb-4 ${msg.role === 'mentor' ? 'text-left' : 'text-right'}`}>
+                      <div
+                        class={`inline-block p-4 rounded-lg ${
+                          msg.role === 'mentor' ? 'bg-purple-200' : 'bg-blue-200'
+                        }`}
+                      >
+                        <SolidMarkdown>{msg.content}</SolidMarkdown>
+                      </div>
+                    </div>
+                  )}
+                </For>
               </div>
-              <h2 class="text-2xl font-bold mb-4 text-purple-600">Enter Your Answer</h2>
-              <textarea
-                placeholder="Type your answer here..."
-                value={answer()}
-                onInput={(e) => setAnswer(e.target.value)}
-                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent box-border"
-                required
-              />
+              <form onSubmit={handleSubmitAnswer} class="space-y-4">
+                <textarea
+                  placeholder="Type your response here..."
+                  value={answerInput()}
+                  onInput={(e) => setAnswerInput(e.target.value)}
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent box-border"
+                  required
+                />
+                <button
+                  type="submit"
+                  class={`w-full px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer ${
+                    loading() ? 'opacity-50 cursor-not-allowed' : ''
+                  }`}
+                  disabled={loading()}
+                >
+                  <Show when={loading()} fallback="Submit">
+                    Sending...
+                  </Show>
+                </button>
+              </form>
               <button
-                type="submit"
-                class={`w-full px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer ${
-                  loading() ? 'opacity-50 cursor-not-allowed' : ''
-                }`}
-                disabled={loading()}
+                class="mt-4 w-full px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+                onClick={() => {
+                  resetState();
+                }}
               >
-                <Show when={loading()} fallback="Submit Answer">
-                  Checking...
-                </Show>
+                New Question
               </button>
-            </form>
-          </Show>
-          <Show when={feedback()}>
-            <h2 class="text-2xl font-bold mb-4 text-purple-600">Feedback</h2>
-            <div class="bg-white p-4 rounded-lg shadow-md">
-              <p class="text-gray-700 whitespace-pre-wrap">{feedback()}</p>
             </div>
-            <button
-              class="mt-4 w-full px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
-              onClick={() => {
-                resetState();
-              }}
-            >
-              New Question
-            </button>
           </Show>
           <p class="mt-8 text-center text-gray-600">
             Made on{' '}
@@ -270,3 +296,4 @@ function App() {
 }
 
 export default App;
+```

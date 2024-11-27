@@ -8,8 +8,8 @@ Personalised Learning is an app that provides personalized learning support for 
 2. [Generate Question](docs/journeys/generate-question.md) - Have the app generate a question for you.
 3. [Submit Question](docs/journeys/submit-question.md) - Input a question you want help with.
 4. [Submit Answer](docs/journeys/submit-answer.md) - Provide your answer to the question.
-5. [Receive Feedback](docs/journeys/receive-feedback.md) - Get guidance based on your answer.
+5. [Receive Feedback](docs/journeys/receive-feedback.md) - Engage in a conversational back-and-forth to reach the correct answer.
 
 ## External APIs Used
 
-- **ChatGPT**: Used to generate questions, check the student's answer, and provide feedback or guidance.
+- **ChatGPT**: Used to generate questions, check the student's answer, and provide feedback or guidance in a conversational manner.

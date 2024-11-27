@@ -1,18 +1,21 @@
 # Receive Feedback
 
-Get guidance based on your answer.
+Engage in a conversational back-and-forth to reach the correct answer.
 
 ## Steps
 
-1. **Wait for Feedback**: After submitting your answer, the app will process your response.
-   - A loading indicator may appear while processing.
-2. **View Feedback**: Feedback from the app will be displayed on the screen.
-   - If your answer is correct, you'll receive a "Great job!" message.
-   - If not, the app will provide guidance to help you understand how to answer correctly without stating the answer directly.
-3. **Reflect and Retry**: Use the guidance to improve your understanding.
-4. **New Question**: Click the "New Question" button to start the process again if desired.
+1. **Wait for Mentor's Response**: After submitting your answer, the app will provide feedback in the form of a message from the mentor.
+   - The mentor will guide you without directly giving the answer.
+   - Feedback is displayed using proper formatting for readability.
+2. **Review Feedback**: Read the mentor's message carefully.
+3. **Respond to Mentor**: Use the input area to type your follow-up answer or ask additional questions.
+4. **Continue the Conversation**: Submit your response to continue the dialogue.
+   - The conversation simulates a back-and-forth with a tutor.
+5. **Repeat as Needed**: Continue this process until you reach the correct answer or feel satisfied with your understanding.
+6. **Start a New Question**: Click the "New Question" button to begin with a new question if desired.
 
 ## Notes
 
-- The app acts as a mentor, helping you learn without giving away the answers.
-- Take the feedback into consideration and try to understand the underlying concepts.
+- The app facilitates a guided learning experience through conversation.
+- The mentor aims to help you think critically and arrive at the correct answer on your own.
+- All messages support markdown formatting for enhanced readability.
