@@ -101,18 +101,18 @@ Respond as the mentor in first person.`,
         }
       >
         <form onSubmit={handleSubmitAnswer} class="p-4 bg-white border-t border-gray-300">
-          <div class="flex items-center">
+          <div class="flex flex-col md:flex-row items-center">
             <textarea
               placeholder="Type your response..."
               value={answerInput()}
               onInput={(e) => setAnswerInput(e.target.value)}
               rows="8"
-              class="flex-1 resize-none p-3 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 box-border text-gray-800"
+              class="flex-1 w-full resize-none p-3 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 box-border text-gray-800"
               required
             />
             <button
               type="submit"
-              class="ml-4 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-300 ease-in-out cursor-pointer"
+              class="mt-4 md:mt-0 md:ml-4 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-300 ease-in-out cursor-pointer"
             >
               Send
             </button>
