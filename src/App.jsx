@@ -1,4 +1,4 @@
-import { createSignal, onMount, Show, onCleanup, For } from 'solid-js';
+import { createSignal, onMount, Show, onCleanup, For, createEffect, on } from 'solid-js';
 import { createEvent, supabase } from './supabaseClient';
 import { Auth } from '@supabase/auth-ui-solid';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
@@ -14,6 +14,9 @@ function App() {
   const [year, setYear] = createSignal('');
   const [subject, setSubject] = createSignal('');
   const [loadingQuestionGeneration, setLoadingQuestionGeneration] = createSignal(false);
+
+  // Declare conversationContainer ref
+  let conversationContainer;
 
   // Authentication
   onMount(() => {
@@ -116,6 +119,19 @@ Respond as the mentor in first person.`,
       }
     }
   };
+
+  // Scroll to bottom when conversation updates
+  createEffect(
+    on(
+      () => conversation().length,
+      () => {
+        if (conversationContainer) {
+          conversationContainer.scrollTop = conversationContainer.scrollHeight;
+        }
+      },
+      { defer: true }
+    )
+  );
 
   return (
     <div class="min-h-screen bg-gradient-to-br from-purple-100 to-blue-100 p-4 text-gray-800">
@@ -232,7 +248,10 @@ Respond as the mentor in first person.`,
           <Show when={question()}>
             <div class="space-y-4">
               <h2 class="text-2xl font-bold mb-4 text-purple-600">Conversation</h2>
-              <div class="bg-white p-4 rounded-lg shadow-md max-h-[50vh] overflow-y-auto">
+              <div
+                ref={el => (conversationContainer = el)}
+                class="bg-white p-4 rounded-lg shadow-md max-h-[50vh] overflow-y-auto"
+              >
                 <For each={conversation()}>
                   {(msg) => (
                     <div class={`mb-4 ${msg.role === 'mentor' ? 'text-left' : 'text-right'}`}>
