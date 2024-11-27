@@ -106,7 +106,7 @@ Respond as the mentor in first person.`,
               placeholder="Type your response..."
               value={answerInput()}
               onInput={(e) => setAnswerInput(e.target.value)}
-              rows="1"
+              rows="8"
               class="flex-1 resize-none p-3 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 box-border text-gray-800"
               required
             />

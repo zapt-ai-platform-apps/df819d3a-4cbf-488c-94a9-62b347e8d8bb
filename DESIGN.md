@@ -90,6 +90,7 @@
 - Input fields with clear labels
 - **Enhanced Textareas**
   - Increased default size for response textarea to improve usability
+  - Changed answer input fields to larger textareas to accommodate longer responses
 
 ### B. Technical Specifications
 
@@ -144,6 +145,7 @@
    - Updated component styles to reflect a toned-down, minimalist design
    - Adjusted headers, footers, and backgrounds for consistency
    - Increased default size of the response textarea to enhance user experience by allowing more space for user input
+   - Changed answer input fields to larger textareas to accommodate longer responses
    - Removed avatar images in conversation to minimize distractions
    - Adjusted conversation width on desktop to improve readability by limiting the maximum width of message bubbles
    - Ensured that interactive elements remain clear and accessible

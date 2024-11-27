@@ -83,6 +83,7 @@ function QuestionForm(props) {
                 placeholder="Type your question here..."
                 value={customQuestion()}
                 onInput={(e) => setCustomQuestion(e.target.value)}
+                rows="8"
                 class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 box-border"
                 required
               />
