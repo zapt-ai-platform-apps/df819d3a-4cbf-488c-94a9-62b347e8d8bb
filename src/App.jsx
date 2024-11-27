@@ -1,4 +1,3 @@
-```jsx
 import { createSignal, onMount, Show, onCleanup, For } from 'solid-js';
 import { createEvent, supabase } from './supabaseClient';
 import { Auth } from '@supabase/auth-ui-solid';
@@ -296,4 +295,3 @@ Respond as the mentor in first person.`,
 }
 
 export default App;
-```
